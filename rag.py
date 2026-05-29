@@ -10,7 +10,7 @@ class DocumentMock:
 
 def ask_rag(query, model, client, groq_client):
     # Acceder a la colección
-    collection = client.get_collection(name="document_collection")
+    collection = client.get_or_create_collection(name="document_collection")
     
     # Búsqueda
     query_embedding = model.encode([query]).tolist()

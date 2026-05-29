@@ -29,6 +29,13 @@ def split_text(text, chunk_size, overlap):
 
 def run_ingestion(model):
     client = chromadb.PersistentClient(path=config.VECTORDB_PATH)
+    
+    # Intentamos borrar la colección existente para asegurar una indexación limpia
+    try:
+        client.delete_collection(name="document_collection")
+    except Exception:
+        pass
+        
     collection = client.get_or_create_collection(name="document_collection")
     
     all_chunks = []
